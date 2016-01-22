@@ -79,11 +79,11 @@ class MyModelView(sqla.ModelView):
 
 # Flask views
 
-# flask admin cuts off my url
-#http://stackoverflow.com/questions/26585050/flask-admin-pages-inaccessible-in-production
+# flask admin cuts off my url  --- this noworky..
+#  http://stackoverflow.com/questions/26585050/flask-admin-pages-inaccessible-in-production
 
 @app.route('/')
-@app.route('/ciy207')
+@app.route('/ciy207/')
 
 def index():
     return render_template('index.html')
