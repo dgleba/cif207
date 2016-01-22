@@ -76,10 +76,18 @@ class MyModelView(sqla.ModelView):
                 # login
                 return redirect(url_for('security.login', next=request.url))
 
+
 # Flask views
+
+# flask admin cuts off my url
+#http://stackoverflow.com/questions/26585050/flask-admin-pages-inaccessible-in-production
+
 @app.route('/')
+@app.route('/ciy207')
+
 def index():
     return render_template('index.html')
+
 
 # Create admin
 admin = flask_admin.Admin(
