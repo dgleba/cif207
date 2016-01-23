@@ -2,6 +2,7 @@
 
 #flask
 sample_db.sqlite
+/config.py
 
 # for trakberry
 static/
