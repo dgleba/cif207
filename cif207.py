@@ -1,5 +1,8 @@
 # orginally from flask-admin auth example.
 
+# http://v206b2:920/admin/#
+
+
 import os
 from flask import Flask, url_for, redirect, render_template, request, abort
 from flask_sqlalchemy import SQLAlchemy
@@ -13,6 +16,10 @@ from flask_admin import helpers as admin_helpers
 from sqlalchemy.ext.automap import automap_base
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin import Admin
+from sqlalchemy import create_engine
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import column_property
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -34,15 +41,44 @@ connection = db.engine.connect()
 db.metadata.reflect(db.engine, only=['books', 'states'])
 
 Base = automap_base(metadata=db.metadata)
+#  ?  Base = declarative_base()
 Base.prepare()
 
+g = globals()
+
+for tablename, tableobj in db.metadata.tables.items():
+    g[tablename] = type(str(tablename), (Base,), {'__table__' : tableobj })
+    print("Reflecting {0}".format(tablename))
+
+	
 Books = Base.classes.books
 States = Base.classes.states
+
+	
+class Books(db.Model):
+    __tablename__ = 'books'
+    # override schema elements like Columns
+    #id2 = Column('id', Integer)
+    # title2 = Column('title', String)
+    # genre2 = Column('genre', String)
+    # rectitle = column_property(title2 + "_" + genre2)
+    def __str__(self):
+        return self.title
+
+		
+# ref:
+# https://gist.github.com/nickretallack/7552307
+# http://stackoverflow.com/questions/17652937/how-to-build-a-flask-application-around-an-already-existing-database
+# http://docs.sqlalchemy.org/en/latest/core/reflection.html#reflecting-all-tables-at-once
+# http://www.blog.pythonlibrary.org/2010/09/10/sqlalchemy-connecting-to-pre-existing-databases/
+
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # manually define books table  -- works, but I want to automap.
+
+# may use sqlacodegen to list fields.
 
 # class books(db.Model):
     # id = db.Column(db.Integer, primary_key=True)
