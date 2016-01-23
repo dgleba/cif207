@@ -17,7 +17,7 @@ db = SQLAlchemy(app)
 
 # Define models
 
-
+# existing table in dgnote130 mysql database....
 class books(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30))
@@ -100,7 +100,7 @@ def index():
 # Create admin
 admin = flask_admin.Admin(
     app,
-    'Example: Auth',
+    'cif207',
     base_template='my_master.html',
     template_mode='bootstrap3',
 )
@@ -147,23 +147,6 @@ def build_sample_db():
             roles=[user_role, super_user_role]
         )
 
-        first_names = [
-            'Harry', 'Lucy'
-        ]
-        last_names = [
-            'Brown', 'Alexander'
-        ]
-
-        for i in range(len(first_names)):
-            tmp_email = first_names[i].lower() + "." + last_names[i].lower() + "@example.com"
-            tmp_pass = ''.join(random.choice(string.ascii_lowercase + string.digits) for i in range(10))
-            user_datastore.create_user(
-                first_name=first_names[i],
-                last_name=last_names[i],
-                email=tmp_email,
-                password=encrypt_password(tmp_pass),
-                roles=[user_role, ]
-            )
         db.session.commit()
     return
 
