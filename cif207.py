@@ -1,4 +1,4 @@
-# orginally flask-admin auth example.
+# orginally from flask-admin auth example.
 
 import os
 from flask import Flask, url_for, redirect, render_template, request, abort
@@ -14,50 +14,35 @@ from sqlalchemy.ext.automap import automap_base
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin import Admin
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Create Flask application
+
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Define models
 
-
 # existing table in dgnote130 mysql database....
+#http://docs.sqlalchemy.org/en/latest/orm/extensions/automap.html
+
+connection = db.engine.connect()
+
+db.metadata.reflect(db.engine, only=['books', 'states'])
+
+Base = automap_base(metadata=db.metadata)
+Base.prepare()
+
+Books = Base.classes.books
+States = Base.classes.states
 
 
-# Sqlalchemy Reflect
-# https://gist.github.com/nickretallack/7552307
-#http://stackoverflow.com/questions/17652937/how-to-build-a-flask-application-around-an-already-existing-database
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#db = SQLAlchemy(app)
-#connection = db.engine.connect()
-db.metadata.reflect(bind=db.engine)
-
-# Models
-class Books(db.Model):
-	__table__ = db.metadata.tables['books']
-
-	
-#_____________
-
-#   http://stackoverflow.com/questions/25828721/foreign-key-relationship-in-flask-admin-when-using-sqlalchemy-automap
-
-# def obj_books(obj):
-    # return obj.title
-
-# def obj_states(obj):
-    # return obj.state
-
-# Base = automap_base(metadata=db.metadata)
-# Base.prepare()
-
-#Base.classes.books.__str__ = obj_books
-#Base.classes.states.__str__ = obj_states
-
-#_____________
-
+# manually define books table  -- works, but I want to automap.
 
 # class books(db.Model):
     # id = db.Column(db.Integer, primary_key=True)
@@ -66,19 +51,15 @@ class Books(db.Model):
     # def __unicode__(self):
         # return self.title
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				
 		
-#_____________
-		
-		
-
 roles_users = db.Table(
     'roles_users',
 	db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
     db.Column('role_id', db.Integer(), db.ForeignKey('role.id'))
 )
 
-class User(Base):
-    __tablename__ = 'user'
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
@@ -107,11 +88,13 @@ class User(db.Model, UserMixin):
 		
 		
 # Setup Flask-Security
+
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 
 
 # Create customized model view class
+
 class MyModelView(sqla.ModelView):
 
     def is_accessible(self):
@@ -147,6 +130,7 @@ def index():
 
 
 # Create admin
+
 admin = flask_admin.Admin(
     app,
     'cif207',
@@ -157,9 +141,17 @@ admin = flask_admin.Admin(
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Add model views
+
+
 admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(User, db.session))
+
 admin.add_view(MyModelView(Books, db.session))
+admin.add_view(MyModelView(States, db.session))
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 # define a context processor for merging flask-admin's template context into the
