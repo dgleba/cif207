@@ -16,6 +16,16 @@ db = SQLAlchemy(app)
 
 
 # Define models
+
+
+class books(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(30))
+    description = db.Column(db.Text, nullable=False)
+    def __unicode__(self):
+        return self.title
+
+
 roles_users = db.Table(
     'roles_users',
     db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
@@ -79,9 +89,7 @@ class MyModelView(sqla.ModelView):
 
 # Flask views
 
-# flask admin cuts off my url  --- this noworky..
-#  http://stackoverflow.com/questions/26585050/flask-admin-pages-inaccessible-in-production
-
+# flask admin cuts off my url  --- this noworky.. #  http://stackoverflow.com/questions/26585050/flask-admin-pages-inaccessible-in-production
 @app.route('/')
 @app.route('/ciy207/')
 
@@ -100,6 +108,8 @@ admin = flask_admin.Admin(
 # Add model views
 admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(User, db.session))
+admin.add_view(MyModelView(books, db.session))
+
 
 # define a context processor for merging flask-admin's template context into the
 # flask-security views.
@@ -120,7 +130,7 @@ def build_sample_db():
     import string
     import random
 
-    db.drop_all()
+    #db.drop_all()
     db.create_all()
 
     with app.app_context():
@@ -138,14 +148,10 @@ def build_sample_db():
         )
 
         first_names = [
-            'Harry', 'Amelia', 'Oliver', 'Jack', 'Isabella', 'Charlie', 'Sophie', 'Mia',
-            'Jacob', 'Thomas', 'Emily', 'Lily', 'Ava', 'Isla', 'Alfie', 'Olivia', 'Jessica',
-            'Riley', 'William', 'James', 'Geoffrey', 'Lisa', 'Benjamin', 'Stacey', 'Lucy'
+            'Harry', 'Lucy'
         ]
         last_names = [
-            'Brown', 'Smith', 'Patel', 'Jones', 'Williams', 'Johnson', 'Taylor', 'Thomas',
-            'Roberts', 'Khan', 'Lewis', 'Jackson', 'Clarke', 'James', 'Phillips', 'Wilson',
-            'Ali', 'Mason', 'Mitchell', 'Rose', 'Davis', 'Davies', 'Rodriguez', 'Cox', 'Alexander'
+            'Brown', 'Alexander'
         ]
 
         for i in range(len(first_names)):
@@ -166,8 +172,8 @@ if __name__ == '__main__':
     # Build a sample db on the fly, if one does not exist yet.
     app_dir = os.path.realpath(os.path.dirname(__file__))
     database_path = os.path.join(app_dir, app.config['DATABASE_FILE'])
-    if not os.path.exists(database_path):
-        build_sample_db()
+    #uncomment to build.... if not os.path.exists(database_path):
+      #uncomment to build....   build_sample_db()
 
     # Start app
     app.run(debug=True)
