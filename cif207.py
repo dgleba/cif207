@@ -1,3 +1,5 @@
+# orginally flask-admin auth example.
+
 import os
 from flask import Flask, url_for, redirect, render_template, request, abort
 from flask_sqlalchemy import SQLAlchemy
@@ -23,19 +25,38 @@ db = SQLAlchemy(app)
 
 
 # existing table in dgnote130 mysql database....
+
+
+# Sqlalchemy Reflect
+# https://gist.github.com/nickretallack/7552307
+#http://stackoverflow.com/questions/17652937/how-to-build-a-flask-application-around-an-already-existing-database
+
+#db = SQLAlchemy(app)
+#connection = db.engine.connect()
+db.metadata.reflect(bind=db.engine)
+
+# Models
+class Books(db.Model):
+	__table__ = db.metadata.tables['books']
+
+	
+#_____________
+
 #   http://stackoverflow.com/questions/25828721/foreign-key-relationship-in-flask-admin-when-using-sqlalchemy-automap
 
-def books_obj(obj):
-    return obj.title
+# def obj_books(obj):
+    # return obj.title
 
-def states_obj(obj):
-    return obj.state
+# def obj_states(obj):
+    # return obj.state
 
-Base = automap_base(metadata=db.metadata)
-Base.prepare()
+# Base = automap_base(metadata=db.metadata)
+# Base.prepare()
 
-Base.classes.books.__str__ = books_obj
-Base.classes.states.__str__ = states_obj
+#Base.classes.books.__str__ = obj_books
+#Base.classes.states.__str__ = obj_states
+
+#_____________
 
 
 # class books(db.Model):
@@ -45,13 +66,19 @@ Base.classes.states.__str__ = states_obj
     # def __unicode__(self):
         # return self.title
 
+		
+#_____________
+		
+		
 
 roles_users = db.Table(
     'roles_users',
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+	db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
     db.Column('role_id', db.Integer(), db.ForeignKey('role.id'))
 )
 
+class User(Base):
+    __tablename__ = 'user'
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
@@ -77,6 +104,8 @@ class User(db.Model, UserMixin):
         return self.email
 
 
+		
+		
 # Setup Flask-Security
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
@@ -130,7 +159,7 @@ admin = flask_admin.Admin(
 # Add model views
 admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(User, db.session))
-admin.add_view(MyModelView(Base.classes.books, db.session))
+admin.add_view(MyModelView(Books, db.session))
 
 
 # define a context processor for merging flask-admin's template context into the
@@ -181,4 +210,4 @@ if __name__ == '__main__':
       #uncomment to build....   build_sample_db()
 
     # Start app
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
