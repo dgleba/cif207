@@ -8,6 +8,10 @@ import flask_admin
 from flask_admin.contrib import sqla
 from flask_admin import helpers as admin_helpers
 
+from sqlalchemy.ext.automap import automap_base
+from flask.ext.admin.contrib.sqla import ModelView
+from flask.ext.admin import Admin
+
 
 # Create Flask application
 app = Flask(__name__)
@@ -17,13 +21,29 @@ db = SQLAlchemy(app)
 
 # Define models
 
+
 # existing table in dgnote130 mysql database....
-class books(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(30))
-    description = db.Column(db.Text, nullable=False)
-    def __unicode__(self):
-        return self.title
+#   http://stackoverflow.com/questions/25828721/foreign-key-relationship-in-flask-admin-when-using-sqlalchemy-automap
+
+def books_obj(obj):
+    return obj.title
+
+def states_obj(obj):
+    return obj.state
+
+Base = automap_base(metadata=db.metadata)
+Base.prepare()
+
+Base.classes.books.__str__ = books_obj
+Base.classes.states.__str__ = states_obj
+
+
+# class books(db.Model):
+    # id = db.Column(db.Integer, primary_key=True)
+    # title = db.Column(db.String(30))
+    # description = db.Column(db.Text, nullable=False)
+    # def __unicode__(self):
+        # return self.title
 
 
 roles_users = db.Table(
@@ -105,10 +125,12 @@ admin = flask_admin.Admin(
     template_mode='bootstrap3',
 )
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # Add model views
 admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(User, db.session))
-admin.add_view(MyModelView(books, db.session))
+admin.add_view(MyModelView(Base.classes.books, db.session))
 
 
 # define a context processor for merging flask-admin's template context into the
