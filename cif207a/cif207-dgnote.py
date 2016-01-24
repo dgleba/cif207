@@ -2,6 +2,7 @@
 
 # http://v206b2:920/admin/#
 
+# this one access the dgnote130 db - a starting point
 
 import os
 from flask import Flask, url_for, redirect, render_template, request, abort
@@ -44,12 +45,24 @@ Base = automap_base(metadata=db.metadata)
 #  ?  Base = declarative_base()
 Base.prepare()
 
+g = globals()
 
+for tablename, tableobj in db.metadata.tables.items():
+    g[tablename] = type(str(tablename), (Base,), {'__table__' : tableobj })
+    print("Reflecting {0}".format(tablename))
+
+	
 Books = Base.classes.books
 States = Base.classes.states
 
+	
 class Books(db.Model):
     __tablename__ = 'books'
+    # override schema elements like Columns
+    #id2 = Column('id', Integer)
+    # title2 = Column('title', String)
+    # genre2 = Column('genre', String)
+    # rectitle = column_property(title2 + "_" + genre2)
     def __str__(self):
         return self.title
 
@@ -60,6 +73,20 @@ class Books(db.Model):
 # http://docs.sqlalchemy.org/en/latest/core/reflection.html#reflecting-all-tables-at-once
 # http://www.blog.pythonlibrary.org/2010/09/10/sqlalchemy-connecting-to-pre-existing-databases/
 
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# manually define books table  -- works, but I want to automap.
+
+# may use sqlacodegen to list fields.
+
+# class books(db.Model):
+    # id = db.Column(db.Integer, primary_key=True)
+    # title = db.Column(db.String(30))
+    # description = db.Column(db.Text, nullable=False)
+    # def __unicode__(self):
+        # return self.title
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 				
@@ -93,6 +120,7 @@ class User(db.Model, UserMixin):
 
     def __str__(self):
         return self.email
+
 
 		
 		
@@ -157,6 +185,7 @@ admin.add_view(MyModelView(User, db.session))
 
 admin.add_view(MyModelView(Books, db.session))
 admin.add_view(MyModelView(States, db.session))
+
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

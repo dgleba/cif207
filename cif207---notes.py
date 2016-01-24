@@ -76,3 +76,20 @@ Books = Base.classes.books
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
 		
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-01-23[Jan-Sat]19-53PM
+
+# Create dummy secrey key so we can use sessions
+#SECRET_KEY = '123456790'
+app.config['SECRET_KEY'] = '123456790'
+
+# Create in-memory database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dg417:dg@localhost/dgnote130'
+
+# Flask-Security config
+app.config['SECURITY_PASSWORD_SALT'] = "ATGUOHAELKiubahiughaerGOJAEGj"
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
