@@ -31,22 +31,9 @@ db = SQLAlchemy(app)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Define models 
+# Define models
 
-# existing table in mysql database....
-
-
-
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Define models - refelct
-
-# existing table in mysql database....
+# existing table in dgnote130 mysql database....
 #http://docs.sqlalchemy.org/en/latest/orm/extensions/automap.html
 
 # reflect models from the database...
@@ -57,7 +44,7 @@ connection = db.engine.connect()
 db.metadata.reflect(db.engine, only=['cilisting1', 'leader'])
 
 Base = automap_base(metadata=db.metadata)
-#?  Base = declarative_base()
+#  ?  Base = declarative_base()
 Base.prepare()
 
 
