@@ -2,8 +2,6 @@
 
 #flask
 sample_db.sqlite
-/config.py
-config.py
 creds.py
 
 # for trakberry

@@ -38,20 +38,20 @@ db = SQLAlchemy(app)
 
 connection = db.engine.connect()
 
-db.metadata.reflect(db.engine, only=['books', 'states'])
+db.metadata.reflect(db.engine, only=['cilisting1', 'leader'])
 
 Base = automap_base(metadata=db.metadata)
 #  ?  Base = declarative_base()
 Base.prepare()
 
 
-Books = Base.classes.books
-States = Base.classes.states
+Cilisting1 = Base.classes.cilisting1
+#States = Base.classes.states
 
-class Books(db.Model):
-    __tablename__ = 'books'
-    def __str__(self):
-        return self.title
+# class Books(db.Model):
+    # __tablename__ = 'books'
+    # def __str__(self):
+        # return self.title
 
 		
 # ref:
@@ -152,11 +152,12 @@ admin = flask_admin.Admin(
 # Add model views
 
 
+
 admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(User, db.session))
 
-admin.add_view(MyModelView(Books, db.session))
-admin.add_view(MyModelView(States, db.session))
+#admin.add_view(MyModelView(Books, db.session))
+admin.add_view(MyModelView(Cilisting1, db.session))
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,8 +207,9 @@ if __name__ == '__main__':
     # Build a sample db on the fly, if one does not exist yet.
     app_dir = os.path.realpath(os.path.dirname(__file__))
     database_path = os.path.join(app_dir, app.config['DATABASE_FILE'])
-    #uncomment to build.... if not os.path.exists(database_path):
-      #uncomment to build....   build_sample_db()
+    #uncomment to build.... 
+    #if not os.path.exists(database_path):
+     #  build_sample_db()
 
     # Start app
     app.run(host='0.0.0.0', debug=True)
