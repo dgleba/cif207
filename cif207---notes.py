@@ -1,6 +1,43 @@
 # orginally from flask-admin auth example.
 
 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-01-24[Jan-Sun]21-44PM
+
+# ref - reflect database:
+
+
+
+# http://docs.sqlalchemy.org/en/latest/orm/extensions/automap.html
+# https://gist.github.com/nickretallack/7552307
+# http://stackoverflow.com/questions/17652937/how-to-build-a-flask-application-around-an-already-existing-database
+# http://docs.sqlalchemy.org/en/latest/core/reflection.html#reflecting-all-tables-at-once
+# http://www.blog.pythonlibrary.org/2010/09/10/sqlalchemy-connecting-to-pre-existing-databases/
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-01-24[Jan-Sun]21-43PM
+
+"""
+ref:
+https://flask-admin.readthedocs.org/en/latest/introduction/#customizing-built-in-views
+
+sqlalchemy reflected column names:
+http://stackoverflow.com/questions/19215759/sqlalchemy-reflecting-tables-and-columns-with-spaces
+http://stackoverflow.com/questions/7679893/how-to-override-a-column-name-in-sqlalchemy-using-reflection-and-descriptive-syn
+http://docs.sqlalchemy.org/en/latest/core/metadata.html
+"""    
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # Define models
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

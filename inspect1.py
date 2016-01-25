@@ -1,5 +1,3 @@
-#
-
 """
 
 http://stackoverflow.com/questions/6039342/how-to-print-all-columns-in-sqlalchemy-orm
@@ -7,11 +5,12 @@ http://stackoverflow.com/questions/6039342/how-to-print-all-columns-in-sqlalchem
 
 """
 
-
+import creds
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-engine = create_engine('mysql://dg417:x@localhost:3306/cilist')
+
+engine = create_engine('mysql://creds.cred['dbu']:creds.cred['dbp']@localhost:3306/cilist')
 DeclarativeBase = declarative_base()
 metadata = DeclarativeBase.metadata
 metadata.bind = engine

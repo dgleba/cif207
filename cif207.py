@@ -1,3 +1,4 @@
+#
 # orginally from flask-admin auth example.
 
 # http://v206b2:920/admin/#
@@ -48,13 +49,6 @@ Cilisting1 = Base.classes.cilisting1
     # def __str__(self):
         # return self.title
 		
-# ref:
-# http://docs.sqlalchemy.org/en/latest/orm/extensions/automap.html
-# https://gist.github.com/nickretallack/7552307
-# http://stackoverflow.com/questions/17652937/how-to-build-a-flask-application-around-an-already-existing-database
-# http://docs.sqlalchemy.org/en/latest/core/reflection.html#reflecting-all-tables-at-once
-# http://www.blog.pythonlibrary.org/2010/09/10/sqlalchemy-connecting-to-pre-existing-databases/
-
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 				
@@ -146,6 +140,7 @@ admin = flask_admin.Admin(
 
 # customize cilisting 
 
+
 class dc_Cilisting1(MyModelView):
     can_delete = False
     page_size = 30
@@ -157,26 +152,17 @@ class dc_Cilisting1(MyModelView):
     
     column_filters = ['project_number', 'suggestion_status',]
 
+
     
-"""
-ref:
-sqlalchemy reflected column names
-http://stackoverflow.com/questions/19215759/sqlalchemy-reflecting-tables-and-columns-with-spaces
-http://stackoverflow.com/questions/7679893/how-to-override-a-column-name-in-sqlalchemy-using-reflection-and-descriptive-syn
-http://docs.sqlalchemy.org/en/latest/core/metadata.html
-"""    
-        
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Add model views
 
 
+admin.add_view(dc_Cilisting1(Cilisting1, db.session))
 
 admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(User, db.session))
-
-#admin.add_view(MyModelView(Books, db.session))
-admin.add_view(dc_Cilisting1(Cilisting1, db.session))
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -191,7 +177,6 @@ def security_context_processor():
         admin_view=admin.index_view,
         h=admin_helpers,
     )
-
 
 def build_sample_db():
     """
