@@ -1,6 +1,34 @@
 # orginally from flask-admin auth example.
 
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-01-25[Jan-Mon]14-13PM
+
+good example?
+
+http://stackoverflow.com/questions/33306647/how-to-call-stored-procedure-using-sqlalchemy
+
+https://codedump.io/share/vK04Oj0Ahu5T/1/how-to-call-stored-procedure-using-sqlalchemy
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-01-25[Jan-Mon]13-52PM
+
+roles
+
+readonly    read only on all info 
+user        can edit some data tables, but not some support-data tables 
+supervisor  can edit data tables,  and support-data tables (like shifts and select choices)
+admin       can edit all info including users and roles.
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Title:  .
