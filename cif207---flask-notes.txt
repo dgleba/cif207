@@ -44,6 +44,17 @@ Title:  .
 # http://docs.sqlalchemy.org/en/latest/core/reflection.html#reflecting-all-tables-at-once
 # http://www.blog.pythonlibrary.org/2010/09/10/sqlalchemy-connecting-to-pre-existing-databases/
 
+http://www.gossamer-threads.com/lists/python/python/1018885
+
+
+http://pythoncentral.io/sqlalchemy-faqs/
+
+
+ggl.
+sqlalchemy table reflection tutorial 
+
+https://petrushev.wordpress.com/2010/06/16/reflective-approach-on-sqlalchemy-usage/
+
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
