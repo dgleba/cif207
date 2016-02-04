@@ -148,10 +148,15 @@ class dc_Cilisting1(MyModelView):
     'idea_Qtr_1',  'ci_leader_1',  'line_num',  'orginator_email',  'z-updatedtime', 'link', 'linkmore', ] 
     
     column_searchable_list = ['comments', 'owner', \
-    'project_number' , 'project_description' , 'owner' , 'comments', 'team' , 'area', 'suggestion_status', 'link',  ]
+    'project_number' , 'project_description' , 'originator' , 'savings_category', 'area', 'id_wc',  'team' , 'metric_impact',  'suggestion_status', 'link',  ]
     
     column_filters = ['project_number', 'suggestion_status',]
 
+    column_display_pk = True
+    
+    can_delete = False
+    page_size = 30
+    column_default_sort = ('ciid', True)
 
     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
