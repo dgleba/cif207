@@ -3,6 +3,19 @@
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Title:  .
+-----------------------2016-02-07[Feb-Sun]22-22PM
+
+pip install sqlacodegen
+
+sqlacodegen sqlite:////var/www/html/python/cif207/sample_db.sqlite > modelsgen.txt
+sqlacodegen sqlite:////var/www/html/python/cif207/sample_db.sqlite > modelsgen.txt
+
+C:\P2\Python27\Scripts\sqlacodegen.exe --help
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
 -----------------------2016-01-25[Jan-Mon]14-13PM
 
 good example?
