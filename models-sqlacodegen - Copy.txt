@@ -1,0 +1,265 @@
+# coding: utf-8
+from sqlalchemy import Column, Date, DateTime, Enum, ForeignKey, Index, Integer, SmallInteger, String, Table, Text, text
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
+
+Base = declarative_base()
+metadata = Base.metadata
+
+
+class AboutThisApp(Base):
+    __tablename__ = 'about_this_app'
+
+    sortorder = Column(Integer, primary_key=True)
+    about_fld = Column(Text, nullable=False)
+    createdtime = Column(DateTime, server_default=text("CURRENT_TIMESTAMP"))
+    updatedtime = Column(DateTime)
+
+
+
+t_cilisting = Table(
+    'cilisting', metadata,
+    Column('ft', String(22)),
+    Column('project_number', String(29)),
+    Column('project_description', String(500)),
+    Column('owner', String(200)),
+    Column('planned_timing', Date),
+    Column('revised_timing', Date),
+    Column('estimated_cost', Integer),
+    Column('savings_category', String(211)),
+    Column('annual_savings_dollars', String(20)),
+    Column('percent_complete', String(26)),
+    Column('comments', Text),
+    Column('originator', String(31)),
+    Column('team', String(600)),
+    Column('documents_complete', Enum(u'No', u'Yes', u'.')),
+    Column('one_time_savings', String(45)),
+    Column('hard_soft_savings', Enum(u'Hard', u'Soft', u'Hard/Soft')),
+    Column('soft_dollars', String(20)),
+    Column('il1_target_date', Date),
+    Column('il2_target_date', Date),
+    Column('il3_target_date', Date),
+    Column('il4_target_date', Date),
+    Column('il5_target_date', Date),
+    Column('wc_idea_date', Date),
+    Column('actual_implementation_date', Date),
+    Column('enter_in_wc', String(25)),
+    Column('area', String(99)),
+    Column('updatedtime', DateTime, server_default=text("'0000-00-00 00:00:00'")),
+    Column('id_wc', String(10)),
+    Column('environmental', String(23)),
+    Column('ease_of_implementation', String(27)),
+    Column('submit', String(10)),
+    Column('line_num', Integer),
+    Column('next_steps', String(987)),
+    Column('suggestion_status', String(99)),
+    Column('ci_leader_1', String(119)),
+    Column('group', String(99)),
+    Column('metric_impact', String(77)),
+    Column('gift_4_suggestion', String(10)),
+    Column('il_current', String(1)),
+    Column('createdtime', DateTime),
+    Column('link', String(567)),
+    Column('linkmore', String(9999)),
+    Column('display', String(11)),
+    Column('idea_Qtr_1', Integer),
+    Column('orginator_email', String(233)),
+    Column('ciid', Integer, server_default=text("'0'")),
+    Column('z-updatedtime', DateTime),
+    Column('record_ref', String(55)),
+    Column('idea_qtr', Integer),
+    Column('fullcommonname', String(22)),
+    Column('ci_leader', String(18))
+)
+
+
+class Cilisting1(Base):
+    __tablename__ = 'cilisting1'
+    __table_args__ = (
+        Index('recordref-idx', 'project_number', 'originator', 'project_description'),
+    )
+
+    ft = Column(String(22))
+    project_number = Column(String(29), nullable=False)
+    project_description = Column(String(500))
+    owner = Column(String(200), index=True)
+    planned_timing = Column(Date)
+    revised_timing = Column(Date)
+    estimated_cost = Column(Integer)
+    savings_category = Column(String(211))
+    annual_savings_dollars = Column(String(20))
+    percent_complete = Column(String(26))
+    comments = Column(Text)
+    originator = Column(String(31), index=True)
+    team = Column(String(600))
+    documents_complete = Column(Enum(u'No', u'Yes', u'.'))
+    one_time_savings = Column(String(45))
+    hard_soft_savings = Column(Enum(u'Hard', u'Soft', u'Hard/Soft'))
+    soft_dollars = Column(String(20))
+    il1_target_date = Column(Date)
+    il2_target_date = Column(Date)
+    il3_target_date = Column(Date)
+    il4_target_date = Column(Date)
+    il5_target_date = Column(Date)
+    wc_idea_date = Column(Date)
+    actual_implementation_date = Column(Date)
+    enter_in_wc = Column(String(25))
+    area = Column(String(99))
+    updatedtime = Column(DateTime, nullable=False, index=True, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    id_wc = Column(String(10))
+    environmental = Column(String(23))
+    ease_of_implementation = Column(String(27))
+    submit = Column(String(10))
+    next_steps = Column(String(987))
+    suggestion_status = Column(String(99))
+    group = Column(String(99))
+    metric_impact = Column(String(77))
+    gift_4_suggestion = Column(String(10))
+    il_current = Column(String(1))
+    createdtime = Column(DateTime)
+    link = Column(String(567), nullable=False)
+    linkmore = Column(String(9999), nullable=False)
+    display = Column(String(11), nullable=False)
+    ciid = Column(Integer, primary_key=True)
+    idea_Qtr_1 = Column(Integer)
+    ci_leader_1 = Column(String(119))
+    line_num = Column(Integer)
+    orginator_email = Column(String(233))
+    z_updatedtime = Column('z-updatedtime', DateTime)
+
+
+class Dashboard(Base):
+    __tablename__ = 'dashboard'
+
+    id = Column(Integer, primary_key=True)
+
+class EmailList(Base):
+    __tablename__ = 'email_list'
+
+    emailname = Column(String(44), unique=True)
+    emailaddr = Column(String(60))
+    note = Column(String(211))
+    egroup = Column(String(91))
+    id = Column(Integer, primary_key=True)
+    updatedtime = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    createdtime = Column(DateTime, nullable=False, server_default=text("'0000-00-00 00:00:00'"))
+
+
+class EmpCeridian(Base):
+    __tablename__ = 'emp_ceridian'
+
+    x1a = Column(String(24))
+    x1b = Column(String(16))
+    x1c = Column(String(12))
+    x1d = Column(String(12))
+    x2 = Column(String(10))
+    x3 = Column(String(6))
+    x4 = Column(String(4))
+    x5 = Column(String(8))
+    x6 = Column(String(10))
+    x7 = Column(String(10))
+    x8a = Column(String(5))
+    x8b = Column(String(10))
+    x8c = Column(String(10))
+    x9 = Column(String(14))
+    eenum = Column(String(7))
+    name = Column(String(99))
+    position = Column(String(99))
+    dept = Column(String(44))
+    x9b = Column(String(10))
+    datehired = Column(Date)
+    shift = Column(String(14))
+    senoritydate = Column(Date)
+    x10 = Column(Integer)
+    x11 = Column(String(13))
+    id = Column(Integer, primary_key=True)
+
+
+class EmpEnterprise(Base):
+    __tablename__ = 'emp_enterprise'
+
+    clock = Column(String(7))
+    name = Column(String(62))
+    dept = Column(String(19))
+    company = Column(String(29))
+    group = Column(String(20))
+    status = Column(String(12))
+    sch_wk1 = Column(String(17))
+    pln_wk1 = Column(String(17))
+    sch_wk2 = Column(String(17))
+    pln_wk2 = Column(String(17))
+    id = Column(Integer, primary_key=True)
+
+
+class Leader(Base):
+    __tablename__ = 'leader'
+    __table_args__ = (
+        Index('name-and-leader', 'fullcommonname', 'ci_leader', unique=True),
+    )
+
+    clocknum = Column(String(7))
+    Name = Column(String(23), unique=True)
+    fullcommonname = Column(String(22), unique=True)
+    ci_leader = Column(String(18), index=True)
+    comment = Column(String(20))
+    id = Column(Integer, primary_key=True)
+    updatedtime = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    createdtime = Column(DateTime, nullable=False, server_default=text("'0000-00-00 00:00:00'"))
+    position = Column(String(30))
+    shift = Column(String(2))
+    dept = Column(String(24))
+    Common_Name = Column(String(18))
+    fullname = Column(String(22))
+    Middleproper = Column(String(9))
+    Lastproper = Column(String(16))
+    Firstproper = Column(String(11))
+    First = Column(String(11))
+    Middle = Column(String(9))
+    Last = Column(String(16))
+
+
+class Role(Base):
+    __tablename__ = 'role'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(80), unique=True)
+    description = Column(String(255))
+
+    users = relationship(u'User', secondary='roles_users')
+
+
+t_roles_users = Table(
+    'roles_users', metadata,
+    Column('user_id', ForeignKey(u'user.id'), index=True),
+    Column('role_id', ForeignKey(u'role.id'), index=True)
+)
+
+
+class User(Base):
+    __tablename__ = 'user'
+
+    id = Column(Integer, primary_key=True)
+    first_name = Column(String(255))
+    last_name = Column(String(255))
+    email = Column(String(255), unique=True)
+    password = Column(String(255))
+    active = Column(Integer)
+    confirmed_at = Column(DateTime)
+
+
+class User(Base):
+    __tablename__ = 'users'
+
+    username = Column(String(32), primary_key=True)
+    password = Column(String(244), nullable=False)
+    Role = Column(Enum(u'READ ONLY', u'NO ACCESS', u'EDIT', u'DELETE', u'OWNER', u'USER', u'ADMIN', u'REGISTER', u'ADDER', u'EDITB1'), server_default=text("'ADDER'"))
+    first_name = Column(String(233))
+    last_name = Column(String(233))
+    address = Column(String(244))
+    phone_num = Column(String(211))
+    email = Column(String(234), nullable=False)
+    comment_fld1 = Column(Text)
+    createdtime = Column(DateTime, server_default=text("CURRENT_TIMESTAMP"))
+    updatedtime = Column(DateTime)
+

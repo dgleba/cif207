@@ -1,2 +1,71 @@
 
 'ft',  'project_number',  'project_description',  'owner',  'planned_timing',  'revised_timing',  'estimated_cost',  'savings_category',  'annual_savings_dollars',  'percent_complete',  'comments',  'originator',  'team',  'documents_complete',  'one_time_savings',  'hard_soft_savings',  'soft_dollars',  'il1_target_date',  'il2_target_date',  'il3_target_date',  'il4_target_date',  'il5_target_date',  'wc_idea_date',  'actual_implementation_date',  'enter_in_wc',  'area',  'updatedtime',  'id_wc',  'environmental',  'ease_of_implementation',  'submit',  'next_steps',  'suggestion_status',  'group',  'metric_impact',  'gift_4_suggestion',  'il_current',  'createdtime',  'link',  'linkmore',  'display',  'ciid',  'idea_Qtr_1',  'ci_leader_1',  'line_num',  'orginator_email',  'z_updatedtime',  
+
+
+reorderd...
+ 'project_number',  'project_description',  'owner',  'comments', 'display',  'originator',  'team',  'documents_complete', 'wc_idea_date',  'actual_implementation_date', \
+ 'id_wc',  'environmental', 'metric_impact',  'gift_4_suggestion',  'link',  'linkmore',   'ft',  'ciid',  'updatedtime', \
+ 'planned_timing',  'revised_timing',  'estimated_cost',  'savings_category',  'annual_savings_dollars',  'percent_complete',   'one_time_savings',  'hard_soft_savings',  'soft_dollars',  'il1_target_date',  'il2_target_date',  'il3_target_date', \ 'il4_target_date',  'il5_target_date',   'enter_in_wc',  'area',     'ease_of_implementation',  'submit',  'next_steps',  'suggestion_status',  'group',    'il_current',  'createdtime', \
+
+
+text search...
+  'project_number',  'project_description',  'owner',  'planned_timing',   'savings_category',  'annual_savings_dollars',  'percent_complete',  'comments',  'originator',  'team',  'documents_complete',  'one_time_savings',  'hard_soft_savings',  'soft_dollars',  'il1_target_date',  'il2_target_date',  'il3_target_date',  'il4_target_date',  'il5_target_date',  'wc_idea_date',  'actual_implementation_date',  'enter_in_wc',  'area',  'updatedtime',  'id_wc',  'environmental',  'ease_of_implementation',  'submit',  'next_steps',  'suggestion_status',  'group',  'metric_impact',  'gift_4_suggestion',  'il_current',  'createdtime',  'link',  'linkmore',  'display',  'ciid',  'idea_Qtr_1',  'ci_leader_1',  'line_num',  'orginator_email',  'z_updatedtime',  
+  
+
+not search text...
+    documents_complete = Column(Enum(u'No', u'Yes', u'.'))
+    il1_target_date = Column(Date)
+    il2_target_date = Column(Date)
+    il3_target_date = Column(Date)
+    il4_target_date = Column(Date)
+    il5_target_date = Column(Date)
+    wc_idea_date = Column(Date)
+    actual_implementation_date = Column(Date)
+    updatedtime = Column(DateTime, nullable=False, index=True, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    createdtime = Column(DateTime)
+    ciid = Column(Integer, primary_key=True)
+    idea_Qtr_1 = Column(Integer)
+    line_num = Column(Integer)
+    z_updatedtime = Column('z-updatedtime', DateTime)
+
+
+    
+    
+string search..  
+    project_number = Column(String(29), nullable=False)
+    project_description = Column(String(500))
+    owner = Column(String(200), index=True)
+    planned_timing = Column(Date)
+    savings_category = Column(String(211))
+    annual_savings_dollars = Column(String(20))
+    percent_complete = Column(String(26))
+    comments = Column(Text)
+    originator = Column(String(31), index=True)
+    team = Column(String(600))
+    documents_complete = Column(Enum(u'No', u'Yes', u'.'))
+    one_time_savings = Column(String(45))
+    hard_soft_savings = Column(Enum(u'Hard', u'Soft', u'Hard/Soft'))
+    soft_dollars = Column(String(20))
+    il4_target_date = Column(Date)
+    wc_idea_date = Column(Date)
+    actual_implementation_date = Column(Date)
+    enter_in_wc = Column(String(25))
+    area = Column(String(99))
+    id_wc = Column(String(10))
+    environmental = Column(String(23))
+    ease_of_implementation = Column(String(27))
+    submit = Column(String(10))
+    next_steps = Column(String(987))
+    suggestion_status = Column(String(99))
+    group = Column(String(99))
+    metric_impact = Column(String(77))
+    gift_4_suggestion = Column(String(10))
+    il_current = Column(String(1))
+    link = Column(String(567), nullable=False)
+    linkmore = Column(String(9999), nullable=False)
+    display = Column(String(11), nullable=False)
+    ciid = Column(Integer, primary_key=True)
+
+
+    
+  

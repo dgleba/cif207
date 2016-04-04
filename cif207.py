@@ -143,18 +143,35 @@ admin = flask_admin.Admin(
 
 class dc_Cilisting1(MyModelView):
     can_delete = False
+    can_view_details = True
     page_size = 30
-    column_exclude_list = [ 'comments' , \
+    
+    column_list = [ 
+    'project_number', 'ciid',  'owner',   'originator',  'suggestion_status', 'project_description',   'comments',  'team',   'wc_idea_date',  'display', 'gift2_4_suggestion',  'link',  'linkmore', 'metric_impact',  'documents_complete', \
+    'actual_implementation_date', \
+    'id_wc',  'environmental',   'ft',    'updatedtime', \
+    'planned_timing',  'revised_timing',  'estimated_cost',  'savings_category',  'annual_savings_dollars',  'percent_complete',   'one_time_savings',  'hard_soft_savings',  'soft_dollars',  'il1_target_date',  'il2_target_date',  'il3_target_date', \
+    'il4_target_date',  'il5_target_date',   'enter_in_wc',  'area',     'ease_of_implementation',  'submit',  'next_steps',  'group',    'il_current',  'createdtime',  ]
+    
+    '''column_exclude_list = [ 'comments' , \
     'idea_Qtr_1',  'ci_leader_1',  'line_num',  'orginator_email',  'z-updatedtime', 'link', 'linkmore', ] 
+    '''   
     
-    column_searchable_list = ['comments', 'owner', \
-    'project_number' , 'project_description' , 'originator' , 'savings_category', 'area', 'id_wc',  'team' , 'metric_impact',  'suggestion_status', 'link',  ]
+    column_editable_list = [  'project_number',  'owner',   'originator',  'suggestion_status', 'project_description',  'comments',  'team',  'wc_idea_date', 'display', 'gift2_4_suggestion', 'link',  'linkmore', 'metric_impact',\
+    'documents_complete',  'actual_implementation_date', ]
+
     
-    column_filters = ['project_number', 'suggestion_status',]
+    column_searchable_list = [
+      'project_number',  'project_description',  'owner',  'planned_timing',   'savings_category',  'annual_savings_dollars',  'percent_complete',  'comments',  'originator',  'team',  'documents_complete',  \
+      'one_time_savings',  'hard_soft_savings', 'soft_dollars',    \
+      'enter_in_wc',  'area',  'updatedtime',  'id_wc',  'environmental',  'ease_of_implementation',  'submit',  'next_steps',  'suggestion_status',  'group',  'metric_impact',  'gift_4_suggestion',  'il_current', \
+      'createdtime',  'link',  'linkmore',  'display', 'ciid',  ]
+    
+
+    column_filters = ['project_number', 'suggestion_status', 'owner',   'comments',  'originator',  'team', ]
 
     column_display_pk = True
     
-    can_delete = False
     page_size = 30
     column_default_sort = ('ciid', True)
 
