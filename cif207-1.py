@@ -145,10 +145,6 @@ class dc_Cilisting1(MyModelView):
     can_delete = False
     can_view_details = True
     page_size = 30
-    column_display_pk = True
-    page_size = 30
-
-    column_default_sort = ('ciid', True)
     
     column_list = [ 
     'project_number', 'ciid',  'owner',   'originator',  'suggestion_status', 'project_description',   'comments',  'team',   'wc_idea_date',  'display', 'gift2_4_suggestion',  'link',  'linkmore', 'metric_impact',  'documents_complete', \
@@ -160,20 +156,24 @@ class dc_Cilisting1(MyModelView):
     '''column_exclude_list = [ 'comments' , \
     'idea_Qtr_1',  'ci_leader_1',  'line_num',  'orginator_email',  'z-updatedtime', 'link', 'linkmore', ] 
     '''   
-
-    column_labels = dict(comments='Comments____________________',)
     
     column_editable_list = [  'project_number',  'owner',   'originator',  'suggestion_status', 'project_description',  'comments',  'team',  'wc_idea_date', 'display', 'gift2_4_suggestion', 'link',  'linkmore', 'metric_impact',\
     'documents_complete',  'actual_implementation_date', ]
 
+    
     column_searchable_list = [
       'project_number',  'project_description',  'owner',  'planned_timing',   'savings_category',  'annual_savings_dollars',  'percent_complete',  'comments',  'originator',  'team',  'documents_complete',  \
       'one_time_savings',  'hard_soft_savings', 'soft_dollars',    \
       'enter_in_wc',  'area',  'updatedtime',  'id_wc',  'environmental',  'ease_of_implementation',  'submit',  'next_steps',  'suggestion_status',  'group',  'metric_impact',  'gift_4_suggestion',  'il_current', \
       'createdtime',  'link',  'linkmore',  'display', 'ciid',  ]
     
+
     column_filters = ['project_number', 'suggestion_status', 'owner',   'comments',  'originator',  'team', ]
 
+    column_display_pk = True
+    
+    page_size = 30
+    column_default_sort = ('ciid', True)
 
     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
